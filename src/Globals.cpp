@@ -1,10 +1,10 @@
 #include "main.h"
 #include "Globals.hpp"
 
-int DriveLFPort = 9;
-int DriveLBPort = 2;
-int DriveRFPort = 10;
-int DriveRBPort = 1;
+int DriveLFPort = 1;
+int DriveLBPort = 10;
+int DriveRFPort = 2;
+int DriveRBPort = 9;
 
 pros::Motor DriveLF(DriveLFPort, pros::v5::MotorGears::green, pros::v5::MotorUnits::degrees);
 pros::Motor DriveLB(DriveLBPort, pros::v5::MotorGears::green, pros::v5::MotorUnits::degrees);

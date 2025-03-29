@@ -73,55 +73,15 @@ void autonomous() {}
  * operator control task will be stopped. Re-enabling the robot will restart the
  * task, not resume it from where it left off.
  */
-void forwards(int speed) {
-	#include "Globals.cpp"
-	DriveLF.move(speed);
-	DriveLB.move(speed);
-	DriveRF.move(- speed);
-	DriveRB.move(- speed);
-}
-
-void backwords(int speed) {
-	#include "Globals.cpp"
-	DriveLF.move(- speed);
-	DriveLB.move(- speed);
-	DriveRF.move(speed);
-	DriveRB.move(speed);
-}
-
-void left(int speed) {
-	#include "Globals.cpp"
-	DriveLF.move(- speed);
-	DriveLB.move(speed);
-	DriveRF.move(- speed);
-	DriveRB.move(speed);
-}
-
-void right(int speed) {
-	#include "Globals.cpp"
-	DriveLF.move(- speed);
-	DriveLB.move(speed);
-	DriveRF.move(- speed);
-	DriveRB.move(speed);
-}
 
 void opcontrol() {
 	#include "Globals.cpp"
-	int XJoystick = Controller.get_analog(ANALOG_LEFT_X);
-	int YJoystick = Controller.get_analog(ANALOG_LEFT_Y);
 	while (true) {
-		if (XJoystick < -10) {
-			left(XJoystick * -1);
-		} else if (XJoystick > 10) {
-			right(XJoystick);
-		} else if (YJoystick > 10) {
-			forwards(YJoystick);
-		} else if (YJoystick < -10) {
-			backwords(YJoystick * -1);
-		} 
-		pros::delay(20);
-	}
+		int X = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
+		int Y = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
 
-	
+		DriveLF.move(Y + X);
+		DriveRF.move(Y - X);
+	}
 }
 
