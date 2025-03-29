@@ -107,23 +107,21 @@ void right(int speed) {
 
 void opcontrol() {
 	#include "Globals.cpp"
-	int XLJoystick = Controler.get_analog(ANALOG_LEFT_X);
-		int XRJoystick = (Controler.get_analog(ANALOG_LEFT_X)* -1);
-		int YUJoystick = Controler.get_analog(ANALOG_LEFT_Y);
-		int YDJoystick = (Controler.get_analog(ANALOG_LEFT_Y)* -1);
+	int XJoystick = Controller.get_analog(ANALOG_LEFT_X);
+	int YJoystick = Controller.get_analog(ANALOG_LEFT_Y);
 	while (true) {
-		if (XLJoystick > 10) {
-			left(XLJoystick);
-		} else if (XRJoystick < -10) {
-			right(XRJoystick);
-		} else if (YUJoystick > 10) {
-			forwards(YUJoystick);
-		} else if (YDJoystick < -10) {
-			backwords(YDJoystick);
+		if (XJoystick < -10) {
+			left(XJoystick * -1);
+		} else if (XJoystick > 10) {
+			right(XJoystick);
+		} else if (YJoystick > 10) {
+			forwards(YJoystick);
+		} else if (YJoystick < -10) {
+			backwords(YJoystick * -1);
 		} 
-		forwards(100);
 		pros::delay(20);
 	}
+
 	
 }
 
