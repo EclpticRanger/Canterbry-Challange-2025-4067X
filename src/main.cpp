@@ -58,6 +58,20 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
+
+void drive() {
+	#include "Globals.cpp"
+	int X = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
+	int Y = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) * -1;
+	int R = Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+
+	DriveLF.move(Y + X + R);
+	DriveRF.move(Y - X - R);
+	DriveLB.move(Y - X + R);
+	DriveRB.move(Y + X - R);
+	pros::delay(20);
+}
+
 void autonomous() {}
 
 /**
@@ -77,11 +91,7 @@ void autonomous() {}
 void opcontrol() {
 	#include "Globals.cpp"
 	while (true) {
-		int X = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
-		int Y = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-
-		DriveLF.move(Y + X);
-		DriveRF.move(Y - X);
-	}
+		drive();
+	} 
 }
 
