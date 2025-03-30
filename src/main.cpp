@@ -65,6 +65,16 @@ void drive() {
 	int Y = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) * -1;
 	int R = Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
 
+	if (abs(X) < 10) {
+		X = 0;
+	}
+	if (abs(Y) < 10) {
+		Y = 0;
+	}
+	if (abs(R) < 10) {
+		R = 0;
+	}
+
 	DriveLF.move(Y + X + R);
 	DriveRF.move(Y - X - R);
 	DriveLB.move(Y - X + R);

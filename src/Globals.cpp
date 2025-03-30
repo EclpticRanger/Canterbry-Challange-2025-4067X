@@ -11,5 +11,4 @@ pros::Motor DriveLB(DriveLBPort, pros::v5::MotorGears::green, pros::v5::MotorUni
 pros::Motor DriveRF(DriveRFPort, pros::v5::MotorGears::green, pros::v5::MotorUnits::degrees);
 pros::Motor DriveRB(DriveRBPort, pros::v5::MotorGears::green, pros::v5::MotorUnits::degrees);
 
-
 pros::Controller Controller(pros::E_CONTROLLER_MASTER);
