@@ -5,7 +5,7 @@ int DriveLFPort = 2; // Left Front Drive Motor Port
 int DriveLBPort = 9; // Left Back Drive Motor Port
 int DriveRFPort = -1; // Right Front Drive Motor Port
 int DriveRBPort = -10; // Right Back Drive Motor Port
-int LeftWingPort = 2; // Left Wing Motor Port
+int LeftWingPort = 3; // Left Wing Motor Port
 int RightWingPort = 8; // Right Wing Motor Port
 int ArmSpeed = 127; // Speed of the Arm Motors
 
