@@ -64,8 +64,8 @@ void drive() {
 	int X = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
 	int Y = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) * -1;
 	int R = Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
-	int Lwing = (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) ? ArmSpeed : 0) - (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2) ? ArmSpeed : 0);
-	int Rwing = (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) ? ArmSpeed : 0) - (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) ? ArmSpeed : 0);
+	int Lwing = (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) * ArmSpeed) - (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2) * ArmSpeed);
+	int Rwing = (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) * ArmSpeed) - (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) * ArmSpeed);
 
 	if (abs(X) < 10) { X = 0;}
 	if (abs(Y) < 10) { Y = 0;}
@@ -80,10 +80,9 @@ void drive() {
 	pros::delay(20);
 }
 
-void automdirve(int X, int Y,int R, int secs) {
+void autodirve(int X, int Y,int R, int S) {
 	#include "Globals.cpp"
-	int secs = (secs * 1000);
-	for (int i = 0; i < (secs / 20); i++) {
+	for (int i = 0; i < (S / 20); i++) {
 		DriveLF.move(Y + X + R);
 		DriveRF.move(Y - X - R);
 		DriveLB.move(Y - X + R);
@@ -93,7 +92,7 @@ void automdirve(int X, int Y,int R, int secs) {
 }
 
 void autonomous() {
-	automdirve(-20, 0, 0, 1);
+	autodirve(-20, 0, 0, 1);
 }
 
 void opcontrol() {

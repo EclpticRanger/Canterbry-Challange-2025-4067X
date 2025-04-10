@@ -16,4 +16,4 @@ pros::Motor DriveRB(DriveRBPort, pros::v5::MotorGears::green, pros::v5::MotorUni
 pros::Motor LeftWing(LeftWingPort, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
 pros::Motor RightWing(RightWingPort, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
 
-pros::Controller Controller(pros::E_CONTROLLER_PARTNER);
+pros::Controller Controller(pros::E_CONTROLLER_MASTER);
