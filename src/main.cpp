@@ -24,7 +24,7 @@ void on_center_button() {
  */
 void initialize() {
 	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello PROS User!");
+	pros::lcd::set_text(1, "I Know How to edit this now!");
 
 	pros::lcd::register_btn1_cb(on_center_button);
 }
@@ -64,39 +64,37 @@ void drive() {
 	int X = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
 	int Y = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) * -1;
 	int R = Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+	int Lwing = (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) ? ArmSpeed : 0) - (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2) ? ArmSpeed : 0);
+	int Rwing = (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) ? ArmSpeed : 0) - (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2) ? ArmSpeed : 0);
 
-	if (abs(X) < 10) {
-		X = 0;
-	}
-	if (abs(Y) < 10) {
-		Y = 0;
-	}
-	if (abs(R) < 10) {
-		R = 0;
-	}
+	if (abs(X) < 10) { X = 0;}
+	if (abs(Y) < 10) { Y = 0;}
+	if (abs(R) < 10) { R = 0;}
 
 	DriveLF.move(Y + X + R);
 	DriveRF.move(Y - X - R);
 	DriveLB.move(Y - X + R);
 	DriveRB.move(Y + X - R);
+	LeftWing.move(Lwing);
+	RightWing.move(Rwing);
 	pros::delay(20);
 }
 
-void autonomous() {}
+void automdirve(int X, int Y,int R, int secs) {
+	#include "Globals.cpp"
+	int secs = (secs * 1000);
+	for (int i = 0; i < (secs / 20); i++) {
+		DriveLF.move(Y + X + R);
+		DriveRF.move(Y - X - R);
+		DriveLB.move(Y - X + R);
+		DriveRB.move(Y + X - R);
+		pros::delay(20);
+	}
+}
 
-/**
- * Runs the operator control code. This function will be started in its own task
- * with the default priority and stack size whenever the robot is enabled via
- * the Field Management System or the VEX Competition Switch in the operator
- * control mode.
- *
- * If no competition control is connected, this function will run immediately
- * following initialize().
- *
- * If the robot is disabled or communications is lost, the
- * operator control task will be stopped. Re-enabling the robot will restart the
- * task, not resume it from where it left off.
- */
+void autonomous() {
+	automdirve(-20, 0, 0, 1);
+}
 
 void opcontrol() {
 	#include "Globals.cpp"
